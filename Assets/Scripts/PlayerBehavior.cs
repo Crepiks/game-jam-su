@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     public float moveSpeed = 10f;
+    public float rotationSpeed = 5000f;
 
     private float vInput;
     private float hInput;
+    private float mouseRotation;
 
     private Rigidbody rigidBody;
 
@@ -22,6 +24,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * moveSpeed;
+        mouseRotation = Input.GetAxis("Mouse X") * rotationSpeed;
+
+        Debug.Log(mouseRotation);
 
         /*
         this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
@@ -32,10 +37,17 @@ public class PlayerBehavior : MonoBehaviour
     private void FixedUpdate()
     {
         float fixedDeltaTime = Time.fixedDeltaTime;
-        rigidBody.MovePosition(this.transform.position + (this.transform.forward * vInput * fixedDeltaTime) + (this.transform.right * hInput * fixedDeltaTime));
+        rigidBody.MovePosition(
+            this.transform.position +
+            (this.transform.forward * vInput * fixedDeltaTime) +
+            (this.transform.right * hInput * fixedDeltaTime)
+        );
 
-        // Physics.SyncTransforms();
-
-        // rigidBody.MovePosition(this.transform.position + this.transform.right * hInput * fixedDeltaTime);
+        if (mouseRotation != 0)
+        {
+            Vector3 rotation = Vector3.up * mouseRotation;
+            Quaternion rotationAngle = Quaternion.Euler(rotation * Time.fixedDeltaTime);
+            rigidBody.MoveRotation(rigidBody.rotation * rotationAngle);
+        }
     }
 }
