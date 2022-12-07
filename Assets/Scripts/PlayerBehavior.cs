@@ -25,13 +25,6 @@ public class PlayerBehavior : MonoBehaviour
         vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * moveSpeed;
         mouseRotation = Input.GetAxis("Mouse X") * rotationSpeed;
-
-        Debug.Log(mouseRotation);
-
-        /*
-        this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
-        this.transform.Translate(Vector3.right * hInput * Time.deltaTime);
-        */
     }
 
     private void FixedUpdate()
