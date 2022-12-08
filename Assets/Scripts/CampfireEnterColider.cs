@@ -11,6 +11,8 @@ public class CampfireEnterColider : MonoBehaviour
     public UnityEvent<CampfireEnterColider> onEnterTrigger;
     public UnityEvent<CampfireEnterColider> onExitTrigger;
 
+    [SerializeField] private Animator animator;
+
     private void OnTriggerEnter(Collider other)
     {
         onEnterTrigger.Invoke(this);
@@ -27,12 +29,21 @@ public class CampfireEnterColider : MonoBehaviour
 
     private void Update()
     {
-        if(inCollider)
+        if (inCollider)
         {
-            if(Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
-                campfireParticles.SetActive(true);
+                animator.SetBool("isTakingSoul", true);
+                StartCoroutine(afterAnimation(1.09f));
             }
         }
+    }
+
+    IEnumerator afterAnimation(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        animator.SetBool("isTakingSoul", false);
+        campfireParticles.SetActive(true);
     }
 }
