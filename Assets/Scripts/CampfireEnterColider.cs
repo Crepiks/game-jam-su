@@ -10,6 +10,7 @@ public class CampfireEnterColider : MonoBehaviour
 
     public UnityEvent<CampfireEnterColider> onEnterTrigger;
     public UnityEvent<CampfireEnterColider> onExitTrigger;
+    public UnityEvent<CampfireEnterColider> onSoulTaken;
 
     [SerializeField] private Animator animator;
 
@@ -45,5 +46,7 @@ public class CampfireEnterColider : MonoBehaviour
 
         animator.SetBool("isTakingSoul", false);
         campfireParticles.SetActive(true);
+
+        onSoulTaken.Invoke(this);
     }
 }
