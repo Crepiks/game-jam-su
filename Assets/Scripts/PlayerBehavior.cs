@@ -7,6 +7,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform camera;
     private CharacterController controller;
+    [SerializeField] private Animator animator;
 
     public float moveSpeed = 10f;
     public float turnSmoothSpeed = 0.1f;
@@ -70,6 +71,8 @@ public class PlayerBehavior : MonoBehaviour
 
         if (movementDirection.magnitude >= 0.1f)
         {
+            animator.SetBool("isWalking", true);
+            Debug.Log("Walk");
             float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothSpeed);
 
@@ -79,6 +82,10 @@ public class PlayerBehavior : MonoBehaviour
             angleDirection.y = ySpeed;
 
             controller.Move(angleDirection.normalized * magnitude * Time.deltaTime);
+        } else
+        {
+            animator.SetBool("isWalking", false);
+            Debug.Log("Walk Stop");
         }
     }
 }
