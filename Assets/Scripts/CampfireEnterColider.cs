@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class CampfireEnterColider : MonoBehaviour
 {
     [SerializeField] GameObject campfireParticles;
+    [SerializeField] GameObject soulsParticles;
 
     private bool inCollider;
     private bool enabled = true;
@@ -54,6 +55,7 @@ public class CampfireEnterColider : MonoBehaviour
 
         animator.SetBool("isTakingSoul", false);
         campfireParticles.SetActive(true);
+        soulsParticles.SetActive(true);
 
         onSoulTaken.Invoke(this);
     }
