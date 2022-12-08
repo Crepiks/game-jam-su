@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class CampfireEnterColider : MonoBehaviour
 {
     [SerializeField] GameObject campfireParticles;
+
     private bool inCollider;
+    private bool enabled = true;
 
     public UnityEvent<CampfireEnterColider> onEnterTrigger;
     public UnityEvent<CampfireEnterColider> onExitTrigger;
@@ -16,7 +18,10 @@ public class CampfireEnterColider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onEnterTrigger.Invoke(this);
+        if (enabled)
+        {
+            onEnterTrigger.Invoke(this);
+        }
 
         inCollider = true;
     }
@@ -30,10 +35,13 @@ public class CampfireEnterColider : MonoBehaviour
 
     private void Update()
     {
-        if (inCollider)
+        if (inCollider && enabled)
         {
             if (Input.GetKey(KeyCode.E))
             {
+                enabled = false;
+                onExitTrigger.Invoke(this);
+
                 animator.SetBool("isTakingSoul", true);
                 StartCoroutine(afterAnimation(1.09f));
             }
