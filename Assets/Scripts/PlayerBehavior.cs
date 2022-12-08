@@ -85,7 +85,6 @@ public class PlayerBehavior : MonoBehaviour
         if (movementDirection.magnitude >= 0.1f)
         {
             animator.SetBool("isWalking", true);
-            Debug.Log("Walk");
             float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothSpeed);
 
@@ -98,7 +97,6 @@ public class PlayerBehavior : MonoBehaviour
         } else
         {
             animator.SetBool("isWalking", false);
-            Debug.Log("Walk Stop");
         }
     }
 }
