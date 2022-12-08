@@ -11,6 +11,7 @@ public class PlayerBehavior : MonoBehaviour
     public float moveSpeed = 10f;
     public float turnSmoothSpeed = 0.1f;
     public float jumpSpeed = 0.1f;
+    public float jumpButtonGracePeriod = 0.2f;
 
     private float vInput;
     private float hInput;
@@ -19,6 +20,9 @@ public class PlayerBehavior : MonoBehaviour
     private float originalStepOffset;
 
     float turnSmoothVelocity;
+
+    private float? lastGroundedTime;
+    private float? jumpButtonPressedTime;
 
     void Start()
     {
@@ -37,14 +41,26 @@ public class PlayerBehavior : MonoBehaviour
 
         ySpeed += Physics.gravity.y * Time.deltaTime;
 
-        if (controller.isGrounded)
+        if(controller.isGrounded)
+        {
+            lastGroundedTime = Time.time;
+        }
+
+        if(Input.GetButtonDown("Jump"))
+        {
+            jumpButtonPressedTime = Time.time;
+        }
+
+        if (Time.time - lastGroundedTime <= jumpButtonGracePeriod)
         {
             controller.stepOffset = originalStepOffset;
             ySpeed = -0.5f;
 
-            if (Input.GetButton("Jump"))
+            if (Time.time - jumpButtonPressedTime <= jumpButtonGracePeriod)
             {
                 ySpeed = jumpSpeed;
+                jumpButtonPressedTime = null;
+                lastGroundedTime = null;
             }
         }
         else
@@ -52,14 +68,17 @@ public class PlayerBehavior : MonoBehaviour
             controller.stepOffset = 0;
         }
 
-        float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothSpeed);
+        if (movementDirection.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothSpeed);
 
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-        Vector3 angleDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        angleDirection.y = ySpeed;
+            Vector3 angleDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            angleDirection.y = ySpeed;
 
-        controller.Move(angleDirection.normalized * magnitude * Time.deltaTime);
+            controller.Move(angleDirection.normalized * magnitude * Time.deltaTime);
+        }
     }
 }
