@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    [SerializeField] private Transform camera;
+    private CharacterController controller;
+
     public float moveSpeed = 10f;
-    public float rotationSpeed = 5000f;
+    public float turnSmoothSpeed = 0.1f;
 
     private float vInput;
     private float hInput;
-    private CharacterController controller;
 
-    // Start is called before the first frame update
+    float turnSmoothVelocity;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -22,20 +25,20 @@ public class PlayerBehavior : MonoBehaviour
     {
         vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * moveSpeed;
-       
 
-        Vector3 movementDirection = new Vector3(hInput, 0, vInput);
+
+        Vector3 movementDirection = new Vector3(hInput, 0, vInput).normalized;
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * moveSpeed;
-        movementDirection.Normalize();
 
-        controller.SimpleMove(movementDirection * magnitude);
-
-        //transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
-
-        if (movementDirection != Vector3.zero)
+        if (movementDirection.magnitude >= 0.1f)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            float targetAngle = Mathf.Atan2(movementDirection.x, movementDirection.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothSpeed);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 angleDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.SimpleMove(angleDirection.normalized * magnitude);
         }
     }
 }
