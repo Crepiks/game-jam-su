@@ -15,6 +15,18 @@ public class TaskUI : MonoBehaviour
 
     public void UpdateTaskText(SoulsCollecting soulsCollectingClass)
     {
-        taskText.text = initialText + soulsCollectingClass.numberOfSouls + "/3";
+        if (soulsCollectingClass.numberOfSouls == 3)
+        {
+            taskText.text = "ѕроведите души до мирового дерева и освободите их";
+        }
+        else
+        {
+            taskText.text = initialText + soulsCollectingClass.numberOfSouls + "/3";
+        }
+    }
+
+    public void FinishText()
+    {
+        taskText.text = "—ледующие разделы в разработке";
     }
 }
