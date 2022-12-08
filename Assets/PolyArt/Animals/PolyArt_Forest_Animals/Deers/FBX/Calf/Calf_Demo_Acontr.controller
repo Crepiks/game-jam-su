@@ -96,6 +96,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: jumped
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1302,7 +1308,7 @@ AnimatorStateMachine:
     m_Position: {x: 204, y: 168, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102217385039020398}
-    m_Position: {x: 210, y: -100, z: 0}
+    m_Position: {x: 480, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102579457789746150}
     m_Position: {x: 420, y: -100, z: 0}
