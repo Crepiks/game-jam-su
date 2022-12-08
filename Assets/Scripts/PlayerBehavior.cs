@@ -20,6 +20,8 @@ public class PlayerBehavior : MonoBehaviour
     private float ySpeed;
     private float originalStepOffset;
 
+    private float initialMoveSpeedValue;
+
     float turnSmoothVelocity;
 
     private float? lastGroundedTime;
@@ -29,6 +31,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         originalStepOffset = controller.stepOffset;
+        initialMoveSpeedValue = moveSpeed;
     }
 
     private void Update()
@@ -67,6 +70,16 @@ public class PlayerBehavior : MonoBehaviour
         else
         {
             controller.stepOffset = 0;
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            moveSpeed = 3 * initialMoveSpeedValue;
+            animator.SetBool("isRunning", true);
+        } else
+        {
+            moveSpeed = initialMoveSpeedValue;
+            animator.SetBool("isRunning", false);
         }
 
         if (movementDirection.magnitude >= 0.1f)
