@@ -5097,54 +5097,54 @@ MonoBehaviour:
   - enabled: 1
     name: SM_Tree_Birch_01
     seed: 46047
-    probability: 65.1
+    probability: 88.3
     collisionCheck: 1
     rejectUnderwater: 0
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 20.625}
     curvatureRange: {x: 0, y: 1}
     layerMasks: []
-    instanceCount: 375
+    instanceCount: 595
     prefabs:
     - index: 0
       probability: 100
-      prefab: {fileID: 1646885935188752, guid: dafad5d52cd284f4b8229a896f9a966f, type: 3}
+      prefab: {fileID: 1248181980244890, guid: fe31fcea5460d6449a9cef0d6b859234, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
   - enabled: 1
     name: SM_Tree_03
-    seed: 24824
-    probability: 58.6
+    seed: 46047
+    probability: 85.8
     collisionCheck: 1
     rejectUnderwater: 0
     heightRange: {x: 0, y: 0.19439313}
     slopeRange: {x: 0, y: 25.588238}
     curvatureRange: {x: 0, y: 1}
     layerMasks: []
-    instanceCount: 28
+    instanceCount: 45
     prefabs:
     - index: 1
       probability: 100
-      prefab: {fileID: 1308358589415666, guid: 43bbe6106d9602b418076e5e6955f800, type: 3}
+      prefab: {fileID: 1248181980244890, guid: fe31fcea5460d6449a9cef0d6b859234, type: 3}
     distance: 9.3
     scaleRange: {x: 0.49575275, y: 0.8957528}
     sinkAmount: 0
   - enabled: 1
     name: SM_Tree_01
-    seed: 76073
-    probability: 62
+    seed: 71029
+    probability: 68
     collisionCheck: 1
     rejectUnderwater: 0
     heightRange: {x: 0, y: 1000}
     slopeRange: {x: 0, y: 43.455883}
     curvatureRange: {x: 0, y: 1}
     layerMasks: []
-    instanceCount: 513
+    instanceCount: 595
     prefabs:
     - index: 2
       probability: 100
-      prefab: {fileID: 1500899924992442, guid: a19f2e49529f1ef4d903f3b663ce7893, type: 3}
+      prefab: {fileID: 1066581525624922, guid: e8a473c390941604887ce3d717898773, type: 3}
     distance: 5
     scaleRange: {x: 0.8, y: 1.2}
     sinkAmount: 0
