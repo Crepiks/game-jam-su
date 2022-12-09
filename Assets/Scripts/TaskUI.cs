@@ -6,7 +6,7 @@ using TMPro;
 public class TaskUI : MonoBehaviour
 {
     private TextMeshProUGUI taskText;
-    private string initialText = "Соберите души из костров: ";
+    private string initialText = "РЎРѕР±РµСЂРёС‚Рµ РґСѓС€Рё РёР· РєРѕСЃС‚СЂРѕРІ: ";
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class TaskUI : MonoBehaviour
     {
         if (soulsCollectingClass.numberOfSouls == 3)
         {
-            taskText.text = "Проведите души до мирового дерева и освободите их";
+            taskText.text = "РџСЂРѕРІРµРґРёС‚Рµ РґСѓС€Рё РґРѕ РјРёСЂРѕРІРѕРіРѕ РґРµСЂРµРІР° Рё РѕСЃРІРѕР±РѕРґРёС‚Рµ РёС…";
         }
         else
         {
@@ -27,6 +27,6 @@ public class TaskUI : MonoBehaviour
 
     public void FinishText()
     {
-        taskText.text = "Следующие разделы в разработке";
+        taskText.text = "РЎР»РµРґСѓСЋС‰РёРµ СЂР°Р·РґРµР»С‹ РІ СЂР°Р·СЂР°Р±РѕС‚РєРµ";
     }
 }

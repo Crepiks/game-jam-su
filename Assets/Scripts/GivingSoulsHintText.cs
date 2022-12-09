@@ -14,7 +14,7 @@ public class GivingSoulsHintText : MonoBehaviour
 
     public void showHintText()
     {
-        hintText.text = "Нажмите E, чтобы освободить души";
+        hintText.text = "РќР°Р¶РјРёС‚Рµ E, С‡С‚РѕР±С‹ РѕСЃРІРѕР±РѕРґРёС‚СЊ РґСѓС€Рё";
     }
 
     public void hideHintText()

@@ -14,7 +14,7 @@ public class CampfireEnterCollisionUI : MonoBehaviour
 
     public void showHintText()
     {
-        hintText.text = "Нажмите E, чтобы взять душу";
+        hintText.text = "РќР°Р¶РјРёС‚Рµ E, С‡С‚РѕР±С‹ РІР·СЏС‚СЊ РґСѓС€Сѓ";
     }
 
     public void hideHintText()
